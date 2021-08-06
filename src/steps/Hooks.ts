@@ -2,7 +2,7 @@ import { Given } from "@cucumber/cucumber";
 import { HomePage } from "../page-object/implementation/HomePage";
 import { Assertions } from "./assertions/assertions";
 
-const homePage = new HomePage();
+let homePage: HomePage;
 
 Given("QAMIND is opened in Chrome", async (): Promise<void> => {
     await homePage.navigateToQamind();

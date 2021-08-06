@@ -1,22 +1,18 @@
 import { IWaitElement } from "./interfaces/IWaitElement";
-import { WebElement, WebDriver, until, Locator } from "selenium-webdriver";
-import { Logger } from "tslog";
+import { WebElement, until, Locator } from "selenium-webdriver";
+import { ElementQa } from "./ElementQa";
 
-const log: Logger = new Logger();
-
-export class ElementWait implements IWaitElement {
-    public static browser: WebDriver;
-
+export class ElementWait extends ElementQa implements IWaitElement {
     public async waitForElementToBeLocated(
         locator: Locator,
     ): Promise<WebElement> {
-        log.info("Waiting for element to be located in the DOM...");
-        const element = await ElementWait.browser.wait(
+        this.log.info("Waiting for element to be located in the DOM...");
+        const element = await this.browser.wait(
             until.elementLocated(locator),
             5000,
         );
         if (!element === null) {
-            log.info("Element is located!");
+            this.log.info("Element is located!");
             return element;
         } else {
             throw new Error("Element is not located");
@@ -26,13 +22,13 @@ export class ElementWait implements IWaitElement {
     public async waitForElementToBeClickable(
         element: WebElement,
     ): Promise<boolean> {
-        log.info("Waiting for element to be enabled for clicking...");
-        await ElementWait.browser.wait(until.elementIsEnabled(element), 5000);
+        this.log.info("Waiting for element to be enabled for clicking...");
+        await this.browser.wait(until.elementIsEnabled(element), 5000);
         if (element.isEnabled()) {
-            log.info("Element is ready to be clicked!");
+            this.log.info("Element is ready to be clicked!");
             return true;
         } else {
-            log.error("Element is still not ready to be clicked!");
+            this.log.error("Element is still not ready to be clicked!");
             return false;
         }
     }
@@ -40,13 +36,13 @@ export class ElementWait implements IWaitElement {
     public async waitForElementToBeVisible(
         element: WebElement,
     ): Promise<boolean> {
-        log.info("Waiting for element to become visible...");
-        await ElementWait.browser.wait(until.elementIsVisible(element), 5000);
+        this.log.info("Waiting for element to become visible...");
+        await this.browser.wait(until.elementIsVisible(element), 5000);
         if (element.isDisplayed()) {
-            log.info("Element is visible!");
+            this.log.info("Element is visible!");
             return true;
         } else {
-            log.error("Element is not visible!");
+            this.log.error("Element is not visible!");
             return false;
         }
     }
@@ -54,13 +50,13 @@ export class ElementWait implements IWaitElement {
     public async waitForElementToBeSelected(
         element: WebElement,
     ): Promise<boolean> {
-        log.info("Waiting for element to be selected...");
-        await ElementWait.browser.wait(until.elementIsSelected(element), 5000);
+        this.log.info("Waiting for element to be selected...");
+        await this.browser.wait(until.elementIsSelected(element), 5000);
         if (element.isSelected()) {
-            log.info("Element is selected!");
+            this.log.info("Element is selected!");
             return true;
         } else {
-            log.error("Element is not selected!");
+            this.log.error("Element is not selected!");
             return false;
         }
     }
@@ -68,13 +64,13 @@ export class ElementWait implements IWaitElement {
     public async waitForElementToBeDisabled(
         element: WebElement,
     ): Promise<boolean> {
-        log.info("Waiting for element to be disabled...");
-        await ElementWait.browser.wait(until.elementIsDisabled(element), 5000);
+        this.log.info("Waiting for element to be disabled...");
+        await this.browser.wait(until.elementIsDisabled(element), 5000);
         if (element.isEnabled()) {
-            log.info("Element is disabled!");
+            this.log.info("Element is disabled!");
             return true;
         } else {
-            log.error("Element is still enabled!");
+            this.log.error("Element is still enabled!");
             return false;
         }
     }
@@ -82,16 +78,13 @@ export class ElementWait implements IWaitElement {
     public async waitForElementToNotBeVisible(
         element: WebElement,
     ): Promise<boolean> {
-        log.info("Waiting for element to disappear...");
-        await ElementWait.browser.wait(
-            until.elementIsNotVisible(element),
-            5000,
-        );
+        this.log.info("Waiting for element to disappear...");
+        await this.browser.wait(until.elementIsNotVisible(element), 5000);
         if (element.isDisplayed()) {
-            log.info("Element is not visible!");
+            this.log.info("Element is not visible!");
             return true;
         } else {
-            log.error("Element is still visible!");
+            this.log.error("Element is still visible!");
             return false;
         }
     }

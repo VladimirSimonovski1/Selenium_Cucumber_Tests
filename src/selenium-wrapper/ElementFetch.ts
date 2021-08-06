@@ -1,23 +1,17 @@
-import { WebElement, Locator, WebDriver } from "selenium-webdriver";
+import { WebElement, Locator } from "selenium-webdriver";
 import { IFetchElement } from "./interfaces/IFetchElement";
-import { Logger } from "tslog";
+import { ElementQa } from "./ElementQa";
 
-const log: Logger = new Logger();
-
-export class ElementFetch implements IFetchElement {
-    public static browser: WebDriver;
-
+export class ElementFetch extends ElementQa implements IFetchElement {
     public async fetchElement(locator: Locator): Promise<WebElement> {
-        log.info("Fetching element...");
-        const fetchedElement = await ElementFetch.browser.findElement(locator);
+        this.log.info("Fetching element...");
+        const fetchedElement = await this.browser.findElement(locator);
         return fetchedElement;
     }
 
     public async fetchElements(locator: Locator): Promise<WebElement[]> {
-        log.info("Fetching elements...");
-        const fetchedElements = await ElementFetch.browser.findElements(
-            locator,
-        );
+        this.log.info("Fetching elements...");
+        const fetchedElements = await this.browser.findElements(locator);
         return fetchedElements;
     }
 }

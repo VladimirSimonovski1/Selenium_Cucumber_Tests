@@ -1,69 +1,65 @@
 import { IBrowser } from "./interfaces/IBrowser";
-import { WebDriver, WebElement } from "selenium-webdriver";
-import { Logger } from "tslog";
+import { WebElement } from "selenium-webdriver";
+import { ElementQa } from "./ElementQa";
 
-const log: Logger = new Logger();
-
-export class Browser implements IBrowser {
-    public static browser: WebDriver;
-
+export class Browser extends ElementQa implements IBrowser {
     public async close(): Promise<void> {
-        await Browser.browser.close();
-        log.info("Browser closed!");
+        await this.browser.close();
+        this.log.info("Browser closed!");
     }
 
     public async maximizeBrowserWindow(): Promise<void> {
-        await Browser.browser.manage().window().maximize();
-        log.info("Browser window maximized!");
+        await this.browser.manage().window().maximize();
+        this.log.info("Browser window maximized!");
     }
 
     public async changeWindowSize(
         width: number,
         height: number,
     ): Promise<void> {
-        await Browser.browser.manage().window().setSize(width, height);
-        const windowSize = await Browser.browser.manage().window().getSize();
-        log.info(
+        await this.browser.manage().window().setSize(width, height);
+        const windowSize = await this.browser.manage().window().getSize();
+        this.log.info(
             `The size of the browser is: ${windowSize.width}; x ${windowSize.height}`,
         );
     }
 
     public async navigateTo(url: string): Promise<void> {
-        log.info(`Navigate to ${url} URL....`);
-        await Browser.browser.navigate().to(url);
+        this.log.info(`Navigate to ${url} URL....`);
+        await this.browser.get(url);
+        await this.browser.navigate().to(url);
     }
 
     public async refreshPage(): Promise<void> {
-        log.info("Refreshing the webpage");
-        await Browser.browser.navigate().refresh();
+        this.log.info("Refreshing the webpage");
+        await this.browser.navigate().refresh();
     }
 
     public async goBack(): Promise<void> {
-        log.info("Going back one step in the browser...");
-        await Browser.browser.navigate().back();
+        this.log.info("Going back one step in the browser...");
+        await this.browser.navigate().back();
     }
 
     public async deleteAllCookies(): Promise<void> {
-        log.info("Deleting all the current cookies");
-        await Browser.browser.manage().deleteAllCookies();
-        const cookiesLength = (await Browser.browser.manage().getCookies())
-            .length;
-        log.info(`Current length of cookies is ${cookiesLength}`);
+        this.log.info("Deleting all the current cookies");
+        await this.browser.manage().deleteAllCookies();
+        const cookiesLength = (await this.browser.manage().getCookies()).length;
+        this.log.info(`Current length of cookies is ${cookiesLength}`);
     }
 
     public async executeScript(script: string): Promise<void> {
-        await Browser.browser.executeScript(script);
+        await this.browser.executeScript(script);
     }
 
     public async scrollToElement(
         script: string,
         element: WebElement,
     ): Promise<void> {
-        await Browser.browser.executeScript(script, element);
+        await this.browser.executeScript(script, element);
     }
 
     public async getCurrentUrl(): Promise<string> {
-        await Browser.browser.sleep(5000);
-        return await Browser.browser.getCurrentUrl();
+        await this.browser.sleep(5000);
+        return await this.browser.getCurrentUrl();
     }
 }

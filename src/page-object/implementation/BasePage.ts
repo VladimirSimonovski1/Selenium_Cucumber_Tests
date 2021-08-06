@@ -6,20 +6,18 @@ import { Browser } from "../../selenium-wrapper/Browser";
 import { ElementWait } from "../../selenium-wrapper/ElementWait";
 
 export abstract class BasePage implements IBasePage {
-    find = new ElementFetch();
-    action = new ElementAction();
-    wait = new ElementWait();
-    browserQa = new Browser();
+    protected find: ElementFetch;
+    protected action: ElementAction;
+    protected wait: ElementWait;
+    protected browserQa: Browser;
 
-    constructor(public baseURL: string) {
-        this.baseURL = baseURL;
-    }
+    constructor(public baseURL: string) {}
 
-    public async navigateToQamind() {
+    public async navigateToQamind(): Promise<void> {
         await this.browserQa.navigateTo(this.baseURL);
     }
 
-    public async deleteCookiesAndMaximizeWindow() {
+    public async deleteCookiesAndMaximizeWindow(): Promise<void> {
         await this.browserQa.deleteAllCookies();
         await this.browserQa.maximizeBrowserWindow();
     }
