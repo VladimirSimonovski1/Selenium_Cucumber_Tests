@@ -48,4 +48,9 @@ export interface IBasePage {
      * @returns Current URL is return
      */
     returnDisplayedURL(): Promise<string>;
+
+    /**
+     * Closes the browser and quits the driver
+     */
+    closeBrowserAndQuiteDriver(): Promise<void>;
 }
