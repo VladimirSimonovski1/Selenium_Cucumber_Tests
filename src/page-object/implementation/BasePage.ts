@@ -6,74 +6,69 @@ import { Browser } from "../../selenium-wrapper/Browser";
 import { ElementWait } from "../../selenium-wrapper/ElementWait";
 
 export abstract class BasePage implements IBasePage {
-    protected find: ElementFetch;
-    protected action: ElementAction;
-    protected wait: ElementWait;
-    protected browserQa: Browser;
-
     constructor(public baseURL: string) {}
 
     public async navigateToQamind(): Promise<void> {
-        await this.browserQa.navigateTo(this.baseURL);
+        await Browser.navigateTo(this.baseURL);
     }
 
     public async deleteCookiesAndMaximizeWindow(): Promise<void> {
-        await this.browserQa.deleteAllCookies();
-        await this.browserQa.maximizeBrowserWindow();
+        await Browser.deleteAllCookies();
+        await Browser.maximizeBrowserWindow();
     }
 
     public async returnInitialVisibleElementValue(): Promise<string> {
-        const element = await this.find.fetchElement(By.id("menu-item-366"));
-        await this.wait.waitForElementToBeVisible(element);
-        return await this.action.getTextFromElement(element);
+        const element = await ElementFetch.fetchElement(By.id("menu-item-366"));
+        await ElementWait.waitForElementToBeVisible(element);
+        return await ElementAction.getTextFromElement(element);
     }
 
     public async clearInputFieldAndEnterText(
         locator: Locator,
         text: string,
     ): Promise<void> {
-        const element = await this.find.fetchElement(locator);
-        await this.browserQa.scrollToElement(
+        const element = await ElementFetch.fetchElement(locator);
+        await Browser.scrollToElement(
             "arguments[0].scrollIntoView(true);",
             element,
         );
-        await this.wait.waitForElementToBeVisible(element);
-        await this.action.inputValueToField(element, text);
+        await ElementWait.waitForElementToBeVisible(element);
+        await ElementAction.inputValueToField(element, text);
     }
 
     public async waitForElementToBeClickableAndClick(
         locator: Locator,
     ): Promise<void> {
-        const element = await this.find.fetchElement(locator);
-        await this.browserQa.scrollToElement(
+        const element = await ElementFetch.fetchElement(locator);
+        await Browser.scrollToElement(
             "arguments[0].scrollIntoView(true);",
             element,
         );
-        await this.wait.waitForElementToBeClickable(element);
-        await this.action.clickOnElement(element);
+        await ElementWait.waitForElementToBeClickable(element);
+        await ElementAction.clickOnElement(element);
     }
 
     public async returnElementValueIfDisplayed(
         locator: Locator,
     ): Promise<string> {
-        const element = await this.find.fetchElement(locator);
-        await this.wait.waitForElementToBeVisible(element);
-        return await this.action.getTextFromElement(element);
+        const element = await ElementFetch.fetchElement(locator);
+        await ElementWait.waitForElementToBeVisible(element);
+        return await ElementAction.getTextFromElement(element);
     }
 
     public async returnElementsIfDisplayed(
         locator: Locator,
     ): Promise<WebElement[]> {
-        const elements = await this.find.fetchElements(locator);
+        const elements = await ElementFetch.fetchElements(locator);
         for (const element of elements) {
-            this.wait.waitForElementToBeVisible(element);
+            ElementWait.waitForElementToBeVisible(element);
         }
         return elements;
     }
 
     public async confirmIfValueIsDisplayed(locator: Locator): Promise<boolean> {
-        const element = await this.find.fetchElement(locator);
-        const isElementVisible = await this.wait.waitForElementToBeVisible(
+        const element = await ElementFetch.fetchElement(locator);
+        const isElementVisible = await ElementWait.waitForElementToBeVisible(
             element,
         );
         if (isElementVisible === true) {
@@ -84,6 +79,10 @@ export abstract class BasePage implements IBasePage {
     }
 
     public async returnDisplayedURL(): Promise<string> {
-        return await this.browserQa.getCurrentUrl();
+        return await Browser.getCurrentUrl();
+    }
+
+    public async closeBrowserAndQuiteDriver(): Promise<void> {
+        await Browser.closeBrowserAndDriver();
     }
 }

@@ -1,8 +1,8 @@
-import { Given } from "@cucumber/cucumber";
+import { AfterAll, Given } from "@cucumber/cucumber";
 import { HomePage } from "../page-object/implementation/HomePage";
 import { Assertions } from "./assertions/assertions";
 
-let homePage: HomePage;
+const homePage = new HomePage();
 
 Given("QAMIND is opened in Chrome", async (): Promise<void> => {
     await homePage.navigateToQamind();
@@ -18,4 +18,8 @@ Given(
 Given("Home Page is visible", async (): Promise<void> => {
     const element = await homePage.returnInitialVisibleElementValue();
     Assertions.checkIfActualEqualsExpected(element, "Categories");
+});
+
+AfterAll(async () => {
+    await homePage.closeBrowserAndQuiteDriver();
 });

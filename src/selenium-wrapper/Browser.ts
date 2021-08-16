@@ -1,65 +1,71 @@
-import { IBrowser } from "./interfaces/IBrowser";
 import { WebElement } from "selenium-webdriver";
-import { ElementQa } from "./ElementQa";
+import { Driver } from "./Driver";
 
-export class Browser extends ElementQa implements IBrowser {
-    public async close(): Promise<void> {
-        await this.browser.close();
-        this.log.info("Browser closed!");
+const Logger = require("bunyan");
+const log = Logger.createLogger({ name: "Browser Log" });
+
+export class Browser extends Driver {
+    public static async closeBrowserAndDriver(): Promise<void> {
+        if (this.driver != null) {
+            await this.driver.close();
+            await this.driver.quit();
+            log.info("Browser and driver are closed!");
+        } else {
+            log.info("Browser and driver are already closed!");
+        }
     }
 
-    public async maximizeBrowserWindow(): Promise<void> {
-        await this.browser.manage().window().maximize();
-        this.log.info("Browser window maximized!");
+    public static async maximizeBrowserWindow(): Promise<void> {
+        await this.driver.manage().window().maximize();
+        log.info("Browser window maximized!");
     }
 
-    public async changeWindowSize(
+    public static async changeWindowSize(
         width: number,
         height: number,
     ): Promise<void> {
-        await this.browser.manage().window().setSize(width, height);
-        const windowSize = await this.browser.manage().window().getSize();
-        this.log.info(
+        await this.driver.manage().window().setSize(width, height);
+        const windowSize = await this.driver.manage().window().getSize();
+        log.info(
             `The size of the browser is: ${windowSize.width}; x ${windowSize.height}`,
         );
     }
 
-    public async navigateTo(url: string): Promise<void> {
-        this.log.info(`Navigate to ${url} URL....`);
-        await this.browser.get(url);
-        await this.browser.navigate().to(url);
+    public static async navigateTo(url: string): Promise<void> {
+        log.info(`Navigate to ${url} URL....`);
+        await this.driver.navigate().to(url);
     }
 
-    public async refreshPage(): Promise<void> {
-        this.log.info("Refreshing the webpage");
-        await this.browser.navigate().refresh();
+    public static async refreshPage(): Promise<void> {
+        log.info("Refreshing the webpage");
+        await this.driver.navigate().refresh();
     }
 
-    public async goBack(): Promise<void> {
-        this.log.info("Going back one step in the browser...");
-        await this.browser.navigate().back();
+    public static async goBack(): Promise<void> {
+        log.info("Going back one step in the browser...");
+        await this.driver.navigate().back();
     }
 
-    public async deleteAllCookies(): Promise<void> {
-        this.log.info("Deleting all the current cookies");
-        await this.browser.manage().deleteAllCookies();
-        const cookiesLength = (await this.browser.manage().getCookies()).length;
-        this.log.info(`Current length of cookies is ${cookiesLength}`);
+    public static async deleteAllCookies(): Promise<void> {
+        log.info("Deleting all the current cookies");
+        await this.driver.manage().deleteAllCookies();
+        const cookiesLength = (await this.driver.manage().getCookies()).length;
+        log.info(`Current length of cookies is ${cookiesLength}`);
     }
 
-    public async executeScript(script: string): Promise<void> {
-        await this.browser.executeScript(script);
+    public static async executeScript(script: string): Promise<void> {
+        await this.driver.executeScript(script);
     }
 
-    public async scrollToElement(
+    public static async scrollToElement(
         script: string,
         element: WebElement,
     ): Promise<void> {
-        await this.browser.executeScript(script, element);
+        await this.driver.executeScript(script, element);
     }
 
-    public async getCurrentUrl(): Promise<string> {
-        await this.browser.sleep(5000);
-        return await this.browser.getCurrentUrl();
+    public static async getCurrentUrl(): Promise<string> {
+        await this.driver.sleep(5000);
+        return await this.driver.getCurrentUrl();
     }
 }
