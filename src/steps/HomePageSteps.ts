@@ -33,6 +33,13 @@ When("Checking the author Linkedin profile", async (): Promise<void> => {
     isLinkedProfileCorrect = await homePage.verifyAuthorLinkedInProfile();
 });
 
+When(
+    "Opening blogs by category: {string}",
+    async (category: string): Promise<void> => {
+        await homePage.selectCategory(category);
+    },
+);
+
 Then(
     "The logo and tagline are displayed and verified",
     async (): Promise<void> => {
@@ -101,3 +108,14 @@ Then(
 Then("The Linkedin profile is correct", async (): Promise<void> => {
     Assertions.checkIfActualValueIsTrue(isLinkedProfileCorrect);
 });
+
+Then(
+    "{string} category headers are displayed",
+    async (expectedCategoryHeader: string): Promise<void> => {
+        const categoryHeader = await homePage.verifyCategoryHeader();
+        Assertions.checkIfActualEqualsExpected(
+            categoryHeader,
+            "Posts published in " + "“" + expectedCategoryHeader + "”",
+        );
+    },
+);

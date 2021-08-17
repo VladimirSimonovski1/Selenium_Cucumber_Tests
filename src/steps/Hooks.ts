@@ -5,7 +5,7 @@ import { Assertions } from "./assertions/assertions";
 const homePage = new HomePage();
 
 Given("QAMIND is opened in Chrome", async (): Promise<void> => {
-    await homePage.navigateToQamind();
+    await homePage.navigateTo();
 });
 
 Given(

@@ -1,7 +1,9 @@
+import { Utils } from "../../utils/Utils";
+import { IHomePage } from "../contracts/IHomePage";
 import { HomePageLocators } from "../locators/QamindLocators";
 import { BasePage } from "./BasePage";
 
-export class HomePage extends BasePage {
+export class HomePage extends BasePage implements IHomePage {
     constructor() {
         super("https://www.qamind.com");
     }
@@ -61,7 +63,7 @@ export class HomePage extends BasePage {
     public async subscribeToNewsletter(): Promise<string> {
         await this.clearInputFieldAndEnterText(
             HomePageLocators.newsletterField,
-            await this.generateRandomEmail(),
+            await Utils.generateRandomEmail(),
         );
         await this.waitForElementToBeClickableAndClick(
             HomePageLocators.newsletterFieldButton,
@@ -117,9 +119,5 @@ export class HomePage extends BasePage {
         return await this.confirmIfValueIsDisplayed(
             HomePageLocators.linkedinButton,
         );
-    }
-
-    private async generateRandomEmail(): Promise<string> {
-        return (Math.random() + 1).toString(36).substring(7) + "@gmail.com";
     }
 }

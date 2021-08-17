@@ -1,7 +1,7 @@
 Feature: Home Page
     As a user
-    I wan to navigate to the www.qamind.com home's page
-    So that I can do some exploratory testing
+    I wan to navigate to the www.qamind.com home page
+    So that I can see all the QA related blogs
 
     Background: QAMIND is open and cache and cookies are deleted
         Given QAMIND is opened in Chrome
@@ -33,9 +33,13 @@ Feature: Home Page
         Then A "Thank you, your sign up request was successful! Please check your e-mail inbox to confirm." message appears
 
     Scenario: Open blogs by category and verify header
-        Given 
-        When 
-        Then 
+        When Opening blogs by category: "<category>"
+        Then "<category>" category headers are displayed
+        Examples: 
+            | category    |
+            | Tutorials   |
+            | Reviews     |
+            | Comparisons |
 
     Scenario: Verify LinkedIn profile of the author of QAMIND 
         When Checking the author Linkedin profile

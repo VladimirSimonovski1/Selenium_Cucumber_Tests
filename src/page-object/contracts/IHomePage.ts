@@ -1,6 +1,6 @@
 import { IBasePage } from "./IBasePage";
 
-export interface HomePage extends IBasePage {
+export interface IHomePage extends IBasePage {
     /**
      * Checks if logo exists
      * @returns True if logo exists, false if not
@@ -66,10 +66,4 @@ export interface HomePage extends IBasePage {
      * @returns verifies the correct linkedin url
      */
     verifyAuthorLinkedInProfile(): Promise<boolean>;
-
-    /**
-     * Generates a random email from string & number
-     * @returns Returns a random email
-     */
-    generateRandomEmail(): Promise<string>;
 }

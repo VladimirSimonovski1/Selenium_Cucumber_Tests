@@ -31,7 +31,7 @@ export class Browser extends Driver {
         );
     }
 
-    public static async navigateTo(url: string): Promise<void> {
+    public static async navigate(url: string): Promise<void> {
         log.info(`Navigate to ${url} URL....`);
         await this.driver.navigate().to(url);
     }

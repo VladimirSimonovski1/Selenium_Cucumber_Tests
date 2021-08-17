@@ -8,8 +8,8 @@ import { ElementWait } from "../../selenium-wrapper/ElementWait";
 export abstract class BasePage implements IBasePage {
     constructor(public baseURL: string) {}
 
-    public async navigateToQamind(): Promise<void> {
-        await Browser.navigateTo(this.baseURL);
+    public async navigateTo(): Promise<void> {
+        await Browser.navigate(this.baseURL);
     }
 
     public async deleteCookiesAndMaximizeWindow(): Promise<void> {

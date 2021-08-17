@@ -6,7 +6,7 @@ export interface IBasePage {
     /**
      * Navigate to QAMIND home page
      */
-    navigateToQamind(): Promise<void>;
+    navigateTo(): Promise<void>;
 
     /**
      * Clears the input field and enters value
