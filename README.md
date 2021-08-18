@@ -26,6 +26,7 @@ POM(Page-Object Model)
 - **bracket pair colorizer**, a customizable extension for colorizing matching brackets
 - **code spell checker**, spelling checker for source code
 - **vscode-icons**, icons for VSCode
+- **cucumberautocomplete**, easy navigation from feature file to their implementation(step definitions)
 
 ### How to run the tests:
 
