@@ -17,19 +17,19 @@ export class GetInTouchPage extends BasePage implements IGetInTouchPage {
     public async fillInFormAndSubmitIt(): Promise<void> {
         await this.clearInputFieldAndEnterText(
             GetInTouchPageLocators.firstName,
-            await Utils.generateRandomEmail(),
+            await Utils.generateRandomString(),
         );
         await this.clearInputFieldAndEnterText(
             GetInTouchPageLocators.lastName,
-            await Utils.generateRandomEmail(),
+            await Utils.generateRandomString(),
         );
         await this.clearInputFieldAndEnterText(
             GetInTouchPageLocators.email,
-            (await Utils.generateRandomEmail()) + "@gmail.com",
+            await Utils.generateRandomEmail(),
         );
         await this.clearInputFieldAndEnterText(
             GetInTouchPageLocators.comment,
-            await Utils.generateRandomEmail(),
+            await Utils.generateRandomString(),
         );
         await this.submitForm();
     }
@@ -41,9 +41,10 @@ export class GetInTouchPage extends BasePage implements IGetInTouchPage {
     }
 
     public async verifySuccessfulSubmission(): Promise<string> {
-        return await this.returnElementValueIfDisplayed(
+        const successMessage = await this.returnElementValueIfDisplayed(
             GetInTouchPageLocators.confirmationMessage,
         );
+        return successMessage;
     }
 
     public async verifyFailedSubmission(): Promise<string[]> {
