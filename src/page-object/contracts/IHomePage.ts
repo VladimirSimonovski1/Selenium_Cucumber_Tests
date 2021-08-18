@@ -63,7 +63,24 @@ export interface IHomePage extends IBasePage {
 
     /**
      * Fetches the linkedin profile for author
-     * @returns verifies the correct linkedin url
+     * @returns True if linkedin profile is visible, false if not
      */
     verifyAuthorLinkedInProfile(): Promise<boolean>;
+
+    /**
+     * Fetches the archive widget title profile for author
+     * @returns True if archive widget title is visible, false if not
+     */
+    verifyAuthorLinkedInProfile(): Promise<boolean>;
+
+    /**
+     * Fetches the archive months fro the archive widget
+     * @returns List of archive months
+     */
+    getArchiveMonths(): Promise<string[]>;
+
+    /**
+     * Clicks on the testing tab
+     */
+    expandTestingTab(): Promise<void>;
 }

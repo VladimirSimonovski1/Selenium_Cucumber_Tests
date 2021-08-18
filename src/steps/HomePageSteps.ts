@@ -1,4 +1,4 @@
-import { When, Then } from "@cucumber/cucumber";
+import { When, Then, DataTable } from "@cucumber/cucumber";
 import { HomePage } from "../page-object/implementation/HomePage";
 import { Assertions } from "./assertions/assertions";
 
@@ -113,9 +113,59 @@ Then(
     "{string} category headers are displayed",
     async (expectedCategoryHeader: string): Promise<void> => {
         const categoryHeader = await homePage.verifyCategoryHeader();
+
         Assertions.checkIfActualEqualsExpected(
             categoryHeader,
             "Posts published in " + "“" + expectedCategoryHeader + "”",
+        );
+    },
+);
+
+Then(
+    "The months from the archive widget are verified",
+    async (dataTable: DataTable): Promise<void> => {
+        const isArchiveTitleVisible = await homePage.verifyArchiveWidgetTitle();
+        Assertions.checkIfActualValueIsTrue(isArchiveTitleVisible);
+
+        const archiveMap = new Map<string, string>();
+        dataTable
+            .hashes()
+            .forEach((rowEntry) =>
+                archiveMap.set(rowEntry.number, rowEntry.month),
+            );
+        const expectedArchiveMonths = new Array<string>();
+        for (const [key, value] of archiveMap) {
+            expectedArchiveMonths.push(value);
+        }
+        const actualArchiveMonths = await homePage.getArchiveMonths();
+
+        Assertions.iterateActualAndCheckIfEqualsExpected(
+            actualArchiveMonths,
+            expectedArchiveMonths,
+        );
+    },
+);
+
+Then(
+    "The topics under Testing tab are verified",
+    async (dataTable: DataTable): Promise<void> => {
+        await homePage.expandTestingTab();
+
+        const testingMap = new Array<string>();
+        dataTable.rows().forEach((row) => {
+            testingMap.push(row.toString());
+        });
+
+        const expectedTestingTopics = new Array<string>();
+        for (const value of testingMap) {
+            expectedTestingTopics.push(value);
+        }
+
+        const actualTestingTopics = await homePage.getTestingTopics();
+
+        Assertions.iterateActualAndCheckIfEqualsExpected(
+            actualTestingTopics,
+            expectedTestingTopics,
         );
     },
 );

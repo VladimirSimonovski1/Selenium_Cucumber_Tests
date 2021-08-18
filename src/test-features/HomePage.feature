@@ -35,12 +35,44 @@ Feature: Home Page
     Scenario: Open blogs by category and verify header
         When Opening blogs by category: "<category>"
         Then "<category>" category headers are displayed
-        Examples: 
+        # This can alsoe be achieved using Scenario Outline
+        Examples:
             | category    |
             | Tutorials   |
             | Reviews     |
             | Comparisons |
 
-    Scenario: Verify LinkedIn profile of the author of QAMIND 
+    Scenario: Verify LinkedIn profile of the author of QAMIND
         When Checking the author Linkedin profile
         Then The Linkedin profile is correct
+
+    Scenario: Verify all months from the archives widget
+        Then The months from the archive widget are verified
+            | number | month         |
+            | 1      | July 2021     |
+            | 2      | June 2021     |
+            | 3      | May 2021      |
+            | 4      | April 2021    |
+            | 5      | March 2021    |
+            | 6      | February 2021 |
+            | 7      | January 2021  |
+            | 8      | December 2020 |
+            | 9      | November 2020 |
+            | 10     | October 2020  |
+            | 11     | August 2020   |
+            | 12     | July 2020     |
+            | 13     | June 2020     |
+            | 14     | May 2020      |
+
+    Scenario: Verify all topics under Testing tab
+        Then The topics under Testing tab are verified
+            | topic                  |
+            | Accessibility Testing  |
+            | Agile Testing          |
+            | API Testing            |
+            | Automation Testing     |
+            | E2E Testing            |
+            | Functional Testing     |
+            | GUI Testing            |
+            | Manual Testing         |
+            | Non-Functional Testing |

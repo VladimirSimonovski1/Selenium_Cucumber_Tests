@@ -25,6 +25,10 @@ export class HomePageLocators {
         By.id("menu-item-363"),
         By.id("menu-item-365"),
     ];
+    public static archiveTitle = By.css(".widget_archive .widget-title");
+    public static archiveMonths = By.css(".widget_archive ul li");
+    public static testingTab = By.id("menu-item-1231");
+    public static testingTopics = By.css("[id='menu-item-1231'] ul li");
 }
 
 export class GetInTouchPageLocators {

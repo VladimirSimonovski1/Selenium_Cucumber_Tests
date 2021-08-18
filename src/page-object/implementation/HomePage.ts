@@ -120,4 +120,28 @@ export class HomePage extends BasePage implements IHomePage {
             HomePageLocators.linkedinButton,
         );
     }
+
+    public async verifyArchiveWidgetTitle(): Promise<boolean> {
+        return await this.confirmIfValueIsDisplayed(
+            HomePageLocators.archiveTitle,
+        );
+    }
+
+    public async getArchiveMonths(): Promise<string[]> {
+        return await this.returnElementsValuesIfDisplayed(
+            HomePageLocators.archiveMonths,
+        );
+    }
+
+    public async expandTestingTab(): Promise<void> {
+        return await this.waitForElementToBeClickableAndClick(
+            HomePageLocators.testingTab,
+        );
+    }
+
+    public async getTestingTopics(): Promise<string[]> {
+        return await this.returnElementsValuesIfDisplayed(
+            HomePageLocators.testingTopics,
+        );
+    }
 }

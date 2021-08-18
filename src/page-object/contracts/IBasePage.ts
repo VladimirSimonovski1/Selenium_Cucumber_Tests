@@ -29,6 +29,13 @@ export interface IBasePage {
     returnElementValueIfDisplayed(locator: Locator): Promise<string>;
 
     /**
+     * Gets the text of elements after displaying
+     * @param locator The locator passed as an argument
+     * @returns The elements text returned
+     */
+    returnElementsValuesIfDisplayed(locator: Locator): Promise<string[]>;
+
+    /**
      * Gets the list of elements if displayed
      * @param locator The locator passed as an argument
      * @returns The elements located

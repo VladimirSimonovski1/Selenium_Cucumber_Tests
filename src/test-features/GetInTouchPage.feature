@@ -13,7 +13,7 @@ Feature: Get In Touch
         When Submitting the form without populating all the fields
         Then "This field is required." messages appear
 
-    @single # Cucumber tag for executiong only one scenario
+    # @single # Cucumber tag for executiong only one scenario
     Scenario: Get in touch with the author
         Given Clicking on the Get In Touch tab
         When Filling and submitting the form

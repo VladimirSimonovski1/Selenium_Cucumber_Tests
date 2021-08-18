@@ -56,6 +56,20 @@ export abstract class BasePage implements IBasePage {
         return await ElementAction.getTextFromElement(element);
     }
 
+    public async returnElementsValuesIfDisplayed(
+        locator: Locator,
+    ): Promise<string[]> {
+        let elementValue: string;
+        const elementArray = new Array<string>();
+        const elements = await ElementFetch.fetchElements(locator);
+        for (const element of elements) {
+            ElementWait.waitForElementToBeVisible(element);
+            elementValue = await ElementAction.getTextFromElement(element);
+            elementArray.push(elementValue);
+        }
+        return elementArray;
+    }
+
     public async returnElementsIfDisplayed(
         locator: Locator,
     ): Promise<WebElement[]> {
@@ -68,6 +82,10 @@ export abstract class BasePage implements IBasePage {
 
     public async confirmIfValueIsDisplayed(locator: Locator): Promise<boolean> {
         const element = await ElementFetch.fetchElement(locator);
+        await Browser.scrollToElement(
+            "arguments[0].scrollIntoView(true);",
+            element,
+        );
         const isElementVisible = await ElementWait.waitForElementToBeVisible(
             element,
         );

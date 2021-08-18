@@ -4,7 +4,7 @@
 
 import { expect } from "chai";
 
-type Default = string | number | number[] | string[] | boolean;
+type Default = string | number | number[] | string[] | boolean | string[][];
 
 export class Assertions {
     /**
@@ -73,6 +73,17 @@ export class Assertions {
     ): void {
         actualArray.forEach((element: T, index: number) => {
             expect(element, message).contains(expectedArray[index]);
+        });
+    }
+
+    public static iterateActualAndCheckIfEqualsExpected<T>(
+        actualArray: T[],
+        expectedArray: T[],
+        message?: string,
+    ): void {
+        expect(actualArray.length).to.equals(expectedArray.length);
+        actualArray.forEach((element: T, index: number) => {
+            expect(element, message).equals(expectedArray[index]);
         });
     }
 
