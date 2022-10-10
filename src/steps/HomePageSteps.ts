@@ -55,7 +55,7 @@ Then("The total number of blogs are displayed", async (): Promise<void> => {
     const numOfBlogs = await homePage.validateTheNumberOfBlogs();
     Assertions.checkIfActualContainsExpected(
         numOfBlogs,
-        "12",
+        "13",
         `The total number of blogs: ${numOfBlogs}`,
     );
 });

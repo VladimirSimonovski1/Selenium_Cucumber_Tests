@@ -31,11 +31,10 @@ Feature: Home Page
     Scenario: Join the newsletter
         When Subscribing to the newsletter
         Then A "Thank you, your sign up request was successful! Please check your e-mail inbox to confirm." message appears
-
+    @single
     Scenario: Open blogs by category and verify header
         When Opening blogs by category: "<category>"
         Then "<category>" category headers are displayed
-        # This can alsoe be achieved using Scenario Outline
         Examples:
             | category    |
             | Tutorials   |
@@ -48,21 +47,27 @@ Feature: Home Page
 
     Scenario: Verify all months from the archives widget
         Then The months from the archive widget are verified
-            | number | month         |
-            | 1      | July 2021     |
-            | 2      | June 2021     |
-            | 3      | May 2021      |
-            | 4      | April 2021    |
-            | 5      | March 2021    |
-            | 6      | February 2021 |
-            | 7      | January 2021  |
-            | 8      | December 2020 |
-            | 9      | November 2020 |
-            | 10     | October 2020  |
-            | 11     | August 2020   |
-            | 12     | July 2020     |
-            | 13     | June 2020     |
-            | 14     | May 2020      |
+            | number | month          |
+            | 1      | March 2022     |
+            | 2      | February 2022  |
+            | 3      | December 2021  |
+            | 4      | October 2021   |
+            | 5      | September 2021 |
+            | 6      | August 2021    |
+            | 7      | July 2021      |
+            | 8      | June 2021      |
+            | 9      | May 2021       |
+            | 10     | April 2021     |
+            | 11     | March 2021     |
+            | 12     | February 2021  |
+            | 13     | January 2021   |
+            | 14     | December 2020  |
+            | 15     | November 2020  |
+            | 16     | October 2020   |
+            | 17     | August 2020    |
+            | 18     | July 2020      |
+            | 19     | June 2020      |
+            | 20     | May 2020       |
 
     Scenario: Verify all topics under Testing tab
         Then The topics under Testing tab are verified
