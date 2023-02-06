@@ -37,8 +37,8 @@ export class GetInTouchPageLocators {
     public static lastName = By.id("wpforms-211-field_0-last");
     public static email = By.id("wpforms-211-field_1");
     public static comment = By.id("wpforms-211-field_2");
-    public static confirmationMessage = By.id("wpforms-confirmation-211");
     public static submit = By.id("wpforms-submit-211");
+    public static confirmationMessage = By.id("wpforms-confirmation-211");
     public static fieldsFailValidationMessage = [
         By.id("wpforms-211-field_0-error"),
         By.id("wpforms-211-field_0-last-error"),
