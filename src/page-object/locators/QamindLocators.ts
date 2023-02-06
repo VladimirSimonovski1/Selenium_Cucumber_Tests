@@ -34,8 +34,8 @@ export class HomePageLocators {
 export class GetInTouchPageLocators {
     public static getInTouchTab = By.id("menu-item-2326");
     public static firstName = By.id("wpforms-211-field_0");
-    public static lastName = By.id("wpforms-211-field_0-last");
     public static email = By.id("wpforms-211-field_1");
+    public static lastName = By.id("wpforms-211-field_0-last");
     public static comment = By.id("wpforms-211-field_2");
     public static submit = By.id("wpforms-submit-211");
     public static confirmationMessage = By.id("wpforms-confirmation-211");
