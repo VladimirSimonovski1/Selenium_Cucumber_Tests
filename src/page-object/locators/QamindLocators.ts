@@ -19,9 +19,9 @@ export class HomePageLocators {
         "li a[href*='in/vladimir-simonovski']",
     );
     public static categories = [
-        By.id("menu-item-361"),
         By.id("menu-item-363"),
         By.id("menu-item-872"),
+        By.id("menu-item-361"),
         By.id("menu-item-362"),
         By.id("menu-item-365"),
     ];
