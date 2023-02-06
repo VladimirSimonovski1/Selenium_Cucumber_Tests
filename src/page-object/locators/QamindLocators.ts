@@ -11,9 +11,9 @@ export class HomePageLocators {
     );
     public static recentPosts = By.css(".recent-news-section .news-item");
     public static newsletterField = By.css("[type='email']");
-    public static newsletterFieldButton = By.css("[value='SUBSCRIBE']");
     public static successSubscribeMsg = By.css(".mc4wp-response");
     public static categoryMenu = By.id("menu-item-366");
+    public static newsletterFieldButton = By.css("[value='SUBSCRIBE']");
     public static categoryPostsHeader = By.css("[id='main'] h1");
     public static linkedinButton = By.css(
         "li a[href*='in/vladimir-simonovski']",
