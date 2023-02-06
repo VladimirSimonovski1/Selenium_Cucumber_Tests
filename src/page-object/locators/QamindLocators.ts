@@ -21,8 +21,8 @@ export class HomePageLocators {
     public static categories = [
         By.id("menu-item-872"),
         By.id("menu-item-361"),
-        By.id("menu-item-362"),
         By.id("menu-item-363"),
+        By.id("menu-item-362"),
         By.id("menu-item-365"),
     ];
     public static archiveTitle = By.css(".widget_archive .widget-title");
