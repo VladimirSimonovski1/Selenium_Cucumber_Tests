@@ -25,7 +25,7 @@
     "@typescript-eslint/parser": "^4.28.5",
     "bunyan": "^1.8.15",
     "chai": "^4.3.4",
-    "chromedriver": "^98.0.0",
+    "chromedriver": "^109.0.0",
     "cucumber-console-formatter": "^1.0.0",
     "cucumber-junit": "^1.7.1",
     "eslint": "^7.31.0",
