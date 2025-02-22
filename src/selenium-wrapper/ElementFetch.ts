@@ -1,8 +1,6 @@
 import { WebElement, Locator } from "selenium-webdriver";
 import { Driver } from "./Driver";
-
-const Logger = require("bunyan");
-const log = Logger.createLogger({ name: "Element Fetch Log" });
+import log from 'log';
 
 export class ElementFetch extends Driver {
     public static async fetchElement(locator: Locator): Promise<WebElement> {

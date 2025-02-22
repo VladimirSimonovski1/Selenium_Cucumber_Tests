@@ -6,6 +6,7 @@ import { BasePage } from "./BasePage";
 export class HomePage extends BasePage implements IHomePage {
     constructor() {
         super("https://www.qamind.com");
+        
     }
 
     public async checkIfLogoExists(): Promise<boolean> {

@@ -1,8 +1,6 @@
 import { WebElement } from "selenium-webdriver";
 import { Driver } from "./Driver";
-
-const Logger = require("bunyan");
-const log = Logger.createLogger({ name: "Browser Log" });
+import log from "log";
 
 export class Browser extends Driver {
     public static async closeBrowserAndDriver(): Promise<void> {

@@ -1,11 +1,10 @@
 import { setDefaultTimeout } from "@cucumber/cucumber";
 import { WebDriver } from "selenium-webdriver";
+import log from "log";
 
 const chrome = require("selenium-webdriver/chrome");
 const chromedriver = require("chromedriver");
 const webdriver = require("selenium-webdriver");
-const Logger = require("bunyan");
-const log = Logger.createLogger({ name: "Browser Log" });
 
 setDefaultTimeout(60 * 1000);
 

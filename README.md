@@ -21,7 +21,7 @@ POM (Page-Object Model)
 ### Plugins & Extensions
 
 - **prettier**, code formatter
-- **bunyan**, powerful, fast and expressive logging for Node.js
+- **log**, powerful, fast and expressive logging for Node.js
 - **multiple-cucumber-html-reporter**, and HTML reporter for cucumber tests
 - **bracket pair colorizer**, a customizable extension for colorizing matching brackets
 - **code spell checker**, spelling checker for source code

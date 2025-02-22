@@ -1,8 +1,7 @@
 import { WebElement, until, Locator } from "selenium-webdriver";
 import { Driver } from "./Driver";
+import log from 'log';
 
-const Logger = require("bunyan");
-const log = Logger.createLogger({ name: "Element Wait Log" });
 
 export class ElementWait extends Driver {
     public static async waitForElementToBeLocated(

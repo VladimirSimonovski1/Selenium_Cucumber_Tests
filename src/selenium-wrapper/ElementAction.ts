@@ -1,7 +1,6 @@
 import { WebElement } from "selenium-webdriver";
+import log from 'log';
 
-const Logger = require("bunyan");
-const log = Logger.createLogger({ name: "Element Action Log" });
 
 export class ElementAction {
     public static async clickOnElement(element: WebElement): Promise<void> {
