@@ -16,7 +16,7 @@ In this **README.md** you will find all the necessary info about this framework 
 
 ### Design Pattern
 
-POM(Page-Object Model)
+POM (Page-Object Model)
 
 ### Plugins & Extensions
 
