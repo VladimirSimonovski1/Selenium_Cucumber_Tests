@@ -1,6 +1,6 @@
 import { When, Then, DataTable } from "@cucumber/cucumber";
 import { HomePage } from "../page-object/implementation/HomePage";
-import { Assertions } from "./assertions/assertions";
+import { Assertions } from "../assertions/assertions";
 
 let logo: boolean;
 let tagline: string;

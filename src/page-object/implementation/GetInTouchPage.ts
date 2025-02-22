@@ -4,6 +4,7 @@ import { GetInTouchPageLocators } from "../locators/QamindLocators";
 import { BasePage } from "./BasePage";
 
 export class GetInTouchPage extends BasePage implements IGetInTouchPage {
+
     constructor() {
         super("/");
     }

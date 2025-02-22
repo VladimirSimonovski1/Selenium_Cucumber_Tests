@@ -1,6 +1,6 @@
 import { Given, When, Then } from "@cucumber/cucumber";
 import { GetInTouchPage } from "../page-object/implementation/GetInTouchPage";
-import { Assertions } from "./assertions/assertions";
+import { Assertions } from "../assertions/assertions";
 
 const getInTouchPage = new GetInTouchPage();
 

@@ -1,6 +1,6 @@
 import { AfterAll, Given } from "@cucumber/cucumber";
 import { HomePage } from "../page-object/implementation/HomePage";
-import { Assertions } from "./assertions/assertions";
+import { Assertions } from "../assertions/assertions";
 
 const homePage = new HomePage();
 
