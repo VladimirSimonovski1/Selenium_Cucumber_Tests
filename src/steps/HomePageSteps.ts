@@ -1,69 +1,75 @@
 import { When, Then, DataTable } from "@cucumber/cucumber";
-import { HomePage } from "../page-object/implementation/HomePage";
-import { Assertions } from "../assertions/assertions";
+import { Assertions } from "../../src/assertions/Assertions";
+import { TestWorld } from "../../src/TestWorld";
 
-let logo: boolean;
-let tagline: string;
-let successMessage: string;
-let numOfRecentPosts: number;
-let isLinkedProfileCorrect: boolean;
-const homePage = new HomePage();
-
-When("Fetching the logo and tagline text", async (): Promise<void> => {
-    logo = await homePage.checkIfLogoExists();
-    tagline = await homePage.getQamindTagline();
+When("Fetching the logo and tagline text", async function (): Promise<void> {
+    this.logo = await this.getInTouchPage.checkIfLogoExists();
+    this.tagline = await this.getInTouchPage.getQamindTagline();
 });
 
 When(
     "Searching for blogs with search criteria: {string}",
-    async (criteria: string): Promise<void> => {
-        await homePage.searchForBlog(criteria);
+    async function (this: TestWorld, criteria: string): Promise<void> {
+        await this.homePage.searchForBlog(criteria);
     },
 );
 
-When("Counting the number of recent posts", async (): Promise<void> => {
-    numOfRecentPosts = await homePage.countTheNumOfRecentPosts();
-});
+When(
+    "Counting the number of recent posts",
+    async function (this: TestWorld): Promise<void> {
+        this.numOfRecentPosts = await this.homePage.countTheNumOfRecentPosts();
+    },
+);
 
-When("Subscribing to the newsletter", async (): Promise<void> => {
-    successMessage = await homePage.subscribeToNewsletter();
-});
+When(
+    "Subscribing to the newsletter",
+    async function (this: TestWorld): Promise<void> {
+        this.successMessage = await this.homePage.subscribeToNewsletter();
+    },
+);
 
-When("Checking the author Linkedin profile", async (): Promise<void> => {
-    isLinkedProfileCorrect = await homePage.verifyAuthorLinkedInProfile();
-});
+When(
+    "Checking the author Linkedin profile",
+    async function (this: TestWorld): Promise<void> {
+        this.isLinkedProfileCorrect =
+            await this.homePage.verifyAuthorLinkedInProfile();
+    },
+);
 
 When(
     "Opening blogs by category: {string}",
-    async (category: string): Promise<void> => {
-        await homePage.selectCategory(category);
+    async function (this: TestWorld, category: string): Promise<void> {
+        await this.homePage.selectCategory(category);
     },
 );
 
 Then(
     "The logo and tagline are displayed and verified",
-    async (): Promise<void> => {
-        Assertions.checkIfActualValueIsTrue(logo);
+    async function (this: TestWorld): Promise<void> {
+        Assertions.checkIfActualValueIsTrue(this.logo);
         Assertions.checkIfActualEqualsExpected(
-            tagline,
+            this.tagline,
             "Free Tutorials & Blog Posts For Software Testing",
         );
     },
 );
 
-Then("The total number of blogs are displayed", async (): Promise<void> => {
-    const numOfBlogs = await homePage.validateTheNumberOfBlogs();
-    Assertions.checkIfActualContainsExpected(
-        numOfBlogs,
-        "13",
-        `The total number of blogs: ${numOfBlogs}`,
-    );
-});
+Then(
+    "The total number of blogs are displayed",
+    async function (this: TestWorld): Promise<void> {
+        const numOfBlogs = await this.homePage.validateTheNumberOfBlogs();
+        Assertions.checkIfActualContainsExpected(
+            numOfBlogs,
+            "13",
+            `The total number of blogs: ${numOfBlogs}`,
+        );
+    },
+);
 
 Then(
     "The blog {string} appears",
-    async (expectedBlogTitle: string): Promise<void> => {
-        const searchResult = await homePage.verifySearchResult();
+    async function (this: TestWorld, expectedBlogTitle: string): Promise<void> {
+        const searchResult = await this.homePage.verifySearchResult();
         Assertions.checkIfActualEqualsExpected(
             searchResult,
             expectedBlogTitle,
@@ -74,8 +80,11 @@ Then(
 
 Then(
     "The message {string} the given search criteria appears",
-    async (expectedNoSearchResult: string): Promise<void> => {
-        const searchResult = await homePage.verifyNoSearchResult();
+    async function (
+        this: TestWorld,
+        expectedNoSearchResult: string,
+    ): Promise<void> {
+        const searchResult = await this.homePage.verifyNoSearchResult();
         Assertions.checkIfActualEqualsExpected(
             searchResult,
             expectedNoSearchResult + '"tdsdsr"',
@@ -85,34 +94,46 @@ Then(
 
 Then(
     "A {string} message appears",
-    async (expectedSuccessMessage: string): Promise<void> => {
+    async function (
+        this: TestWorld,
+        expectedSuccessMessage: string,
+    ): Promise<void> {
         Assertions.checkIfActualEqualsExpected(
-            successMessage,
+            this.successMessage,
             expectedSuccessMessage,
-            `Successful subscription message is: ${successMessage}`,
+            `Successful subscription message is: ${this.successMessage}`,
         );
     },
 );
 
 Then(
     "Total number of recent posts is {int}",
-    async (expectedNumOfRecentPosts: number): Promise<void> => {
+    async function (
+        this: TestWorld,
+        expectedNumOfRecentPosts: number,
+    ): Promise<void> {
         Assertions.checkIfActualEqualsExpected(
-            numOfRecentPosts,
+            this.numOfRecentPosts,
             expectedNumOfRecentPosts,
             `Total number of recent posts: ${expectedNumOfRecentPosts}`,
         );
     },
 );
 
-Then("The Linkedin profile is correct", async (): Promise<void> => {
-    Assertions.checkIfActualValueIsTrue(isLinkedProfileCorrect);
-});
+Then(
+    "The Linkedin profile is correct",
+    async function (this: TestWorld): Promise<void> {
+        Assertions.checkIfActualValueIsTrue(this.isLinkedProfileCorrect);
+    },
+);
 
 Then(
     "{string} category headers are displayed",
-    async (expectedCategoryHeader: string): Promise<void> => {
-        const categoryHeader = await homePage.verifyCategoryHeader();
+    async function (
+        this: TestWorld,
+        expectedCategoryHeader: string,
+    ): Promise<void> {
+        const categoryHeader = await this.homePage.verifyCategoryHeader();
 
         Assertions.checkIfActualEqualsExpected(
             categoryHeader,
@@ -123,8 +144,9 @@ Then(
 
 Then(
     "The months from the archive widget are verified",
-    async (dataTable: DataTable): Promise<void> => {
-        const isArchiveTitleVisible = await homePage.verifyArchiveWidgetTitle();
+    async function (this: TestWorld, dataTable: DataTable): Promise<void> {
+        const isArchiveTitleVisible =
+            await this.homePage.verifyArchiveWidgetTitle();
         Assertions.checkIfActualValueIsTrue(isArchiveTitleVisible);
 
         const archiveMap = new Map<string, string>();
@@ -137,7 +159,7 @@ Then(
         for (const [key, value] of archiveMap) {
             expectedArchiveMonths.push(value);
         }
-        const actualArchiveMonths = await homePage.getArchiveMonths();
+        const actualArchiveMonths = await this.homePage.getArchiveMonths();
 
         Assertions.iterateActualAndCheckIfEqualsExpected(
             actualArchiveMonths,
@@ -148,8 +170,8 @@ Then(
 
 Then(
     "The topics under Testing tab are verified",
-    async (dataTable: DataTable): Promise<void> => {
-        await homePage.expandTestingTab();
+    async function (this: TestWorld, dataTable: DataTable): Promise<void> {
+        await this.homePage.expandTestingTab();
 
         const testingMap = new Array<string>();
         dataTable.rows().forEach((row) => {
@@ -161,7 +183,7 @@ Then(
             expectedTestingTopics.push(value);
         }
 
-        const actualTestingTopics = await homePage.getTestingTopics();
+        const actualTestingTopics = await this.homePage.getTestingTopics();
 
         Assertions.iterateActualAndCheckIfEqualsExpected(
             actualTestingTopics,

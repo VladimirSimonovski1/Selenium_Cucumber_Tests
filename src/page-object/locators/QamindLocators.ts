@@ -29,6 +29,7 @@ export class HomePageLocators {
     public static archiveMonths = By.css(".widget_archive ul li");
     public static testingTab = By.id("menu-item-1231");
     public static testingTopics = By.css("[id='menu-item-1231'] ul li");
+
 }
 
 export class GetInTouchPageLocators {
@@ -45,4 +46,6 @@ export class GetInTouchPageLocators {
         By.id("wpforms-211-field_1-error"),
         By.id("wpforms-211-field_2-error"),
     ];
+    public static headerTitle = By.css("[id='menu-item-1231'] ul li");
+
 }

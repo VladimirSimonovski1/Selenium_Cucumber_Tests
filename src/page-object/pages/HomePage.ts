@@ -1,9 +1,8 @@
 import { Utils } from "../../utils/Utils";
-import { IHomePage } from "../contracts/IHomePage";
 import { HomePageLocators } from "../locators/QamindLocators";
 import { BasePage } from "./BasePage";
 
-export class HomePage extends BasePage implements IHomePage {
+export class HomePage extends BasePage {
     constructor() {
         super("https://www.qamind.com");
         

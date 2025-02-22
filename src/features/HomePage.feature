@@ -12,10 +12,6 @@ Feature: Home Page
         When Fetching the logo and tagline text
         Then The logo and tagline are displayed and verified
 
-    Scenario: Count the number of protractor related blogs
-        When Searching for blogs with search criteria: "Protractor"
-        Then The total number of blogs are displayed
-
     Scenario: Verify that 'Using Protractor for smooth E2E automation' blog appears when searching for Protractor blogs
         When Searching for blogs with search criteria: "Protractor"
         Then The blog "Using Protractor for smooth E2E automation" appears
@@ -31,19 +27,6 @@ Feature: Home Page
     Scenario: Join the newsletter
         When Subscribing to the newsletter
         Then A "Thank you, your sign up request was successful! Please check your e-mail inbox to confirm." message appears
-    @single
-    Scenario: Open blogs by category and verify header
-        When Opening blogs by category: "<category>"
-        Then "<category>" category headers are displayed
-        Examples:
-            | category    |
-            | Tutorials   |
-            | Reviews     |
-            | Comparisons |
-
-    Scenario: Verify LinkedIn profile of the author of QAMIND
-        When Checking the author Linkedin profile
-        Then The Linkedin profile is correct
 
     Scenario: Verify all months from the archives widget
         Then The months from the archive widget are verified

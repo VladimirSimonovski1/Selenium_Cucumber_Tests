@@ -1,11 +1,10 @@
 import { By, Locator, WebElement } from "selenium-webdriver";
 import { ElementAction } from "../../selenium-wrapper/ElementAction";
 import { ElementFetch } from "../../selenium-wrapper/ElementFetch";
-import { IBasePage } from "../contracts/IBasePage";
 import { Browser } from "../../selenium-wrapper/Browser";
 import { ElementWait } from "../../selenium-wrapper/ElementWait";
 
-export abstract class BasePage implements IBasePage {
+export abstract class BasePage {
     constructor(public baseURL: string) {}
 
     public async navigateTo(): Promise<void> {

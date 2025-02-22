@@ -9,8 +9,8 @@
   "scripts": {
     "cucumber-js": "npx cucumber-js -b -p default",
     "prettier": "npx prettier src/**/*.ts* --write",
-    "tests": "npm run prettier && npm run cucumber-js ./src/test-features/*.feature & node HTMLReporter.js",
-    "test": "npm run prettier && npx cucumber-js -b -p default --tags @single ./src/test-features/*.feature & node HTMLReporter.js"
+    "tests": "npm run prettier && npm run cucumber-js ./src/features/*.feature & node HTMLReporter.js",
+    "test": "npm run prettier && npx cucumber-js -b -p default --tags @single ./src/features/*.feature & node HTMLReporter.js"
   },
   "dependencies": {
     "@cucumber/cucumber": "^11.2.0",
