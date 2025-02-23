@@ -51,13 +51,4 @@ export abstract class BasePage {
         await Browser.quitDriver();
     }
 
-    public async scrollAndInput(locator: Locator, text: string): Promise<void> {
-        try {
-            const element = await WaitAndFind.findElement(locator);
-            await Browser.scrollToElement(element);
-            await ElementAction.enterText(element, text);
-        } catch (error) {
-            throw new Error(error);
-        }
-    }
 }

@@ -19,7 +19,7 @@
 "cucumberautocomplete.stepsInvariants": true,
 "cucumberautocomplete.skipDocStringsFormat": true,
 "cucumberautocomplete.onTypeFormat": true,
-"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
+"cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then|And)\\(",
 "cSpell.words": [
     "chromedriver"
 ]

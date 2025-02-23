@@ -6,6 +6,6 @@ Feature: List a flight
     Background: Emirates is opened and cache and cookies are deleted
         Given Emirates website is opened
 
-    Scenario: Search and list a flight
+    Scenario: Verify tha book flight page is visible
         When the user navigates to the book flight page
         Then the user verifies that the book flight page is displayed
