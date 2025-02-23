@@ -1,15 +1,16 @@
 import { Locator, WebElement, until } from "selenium-webdriver";
-import { Browser } from "../Browser";
 import log from "log";
+import { CustomWorld } from "./CustomWorld";
 
-export class WaitAndFind extends Browser {
+export class WaitAndFind {
     public static async findElement(
+        world: CustomWorld,
         locator: Locator,
         timeout: number = 30000,
     ): Promise<WebElement> {
         try {
             log.info("Waiting for element to be located in the DOM...");
-            const element = await this.driver.wait(
+            const element = await world.driver.wait(
                 until.elementLocated(locator),
                 timeout,
             );
@@ -20,21 +21,23 @@ export class WaitAndFind extends Browser {
     }
 
     public static async findElements(
+        world: CustomWorld,
         locator: Locator,
         timeout: number = 30000,
     ): Promise<WebElement[]> {
         log.info("Waiting for the elements to be located in the DOM...");
-        await this.driver.wait(until.elementLocated(locator), timeout);
-        let elements: WebElement[] = await this.driver.findElements(locator);
+        await world.driver.wait(until.elementLocated(locator), timeout);
+        let elements: WebElement[] = await world.driver.findElements(locator);
         return elements;
     }
 
     public static async waitToBeClickable(
+        world: CustomWorld,
         element: WebElement,
         timeout: number = 30000,
     ): Promise<boolean> {
         log.info("Waiting for element to be enabled for clicking...");
-        await this.driver.wait(until.elementIsEnabled(element), timeout);
+        await world.driver.wait(until.elementIsEnabled(element), timeout);
         if (await element.isEnabled()) {
             log.info("Element is ready to be clicked!");
             return true;
@@ -45,11 +48,12 @@ export class WaitAndFind extends Browser {
     }
 
     public static async waitToBeDisplayed(
+        world: CustomWorld,
         element: WebElement,
         timeout: number = 30000,
     ): Promise<boolean> {
         log.info("Waiting for element to become visible...");
-        await this.driver.wait(until.elementIsVisible(element), timeout);
+        await world.driver.wait(until.elementIsVisible(element), timeout);
         if (await element.isDisplayed()) {
             log.info("Element is visible!");
             return true;

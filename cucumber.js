@@ -4,6 +4,7 @@ let common = [
     "--format json:report/result.json",
     "--format cucumber-console-formatter",
     "--tags 'not @ignore'",
+    // "--parallel 3"
 ].join(" ");
 
 module.exports = {

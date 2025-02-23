@@ -1,5 +1,6 @@
 import { By, Locator } from "selenium-webdriver";
 import { BasePage } from "./BasePage";
+import { CustomWorld } from "../../src/support/CustomWorld";
 
 export class HomePage extends BasePage {
     private readonly logo: Locator;
@@ -19,26 +20,33 @@ export class HomePage extends BasePage {
         this.bookFlightPage = By.css("[data-auto='page-header']");
     }
 
-    public async verifyHomePage(): Promise<boolean> {
+    public async navigateTo(world: CustomWorld): Promise<void> {
+        await world.driver.navigate().to(this.baseURL);
+        await world.driver.manage().window().maximize();
+    }
+
+    public async verifyHomePage(world: CustomWorld): Promise<boolean> {
         try {
-            await this.waitAndClick(this.acceptPrivacy);
-            const qamindLogo = await this.isDisplayed(this.logo);
+            await this.click(world, this.acceptPrivacy);
+            const qamindLogo = await this.isDisplayed(world, this.logo);
             return qamindLogo;
         } catch (error) {
             return false;
         }
     }
 
-    public async navigateToBookFlightPage(): Promise<boolean> {
-        await this.waitAndClick(this.book);
-        await this.waitAndClick(this.searchFlight);
-        const isBookFlightPageLoaded = await this.verifyFlightPage();
+    public async navigateToBookFlightPage(
+        world: CustomWorld,
+    ): Promise<boolean> {
+        await this.click(world, this.book);
+        await this.click(world, this.searchFlight);
+        const isBookFlightPageLoaded = await this.verifyFlightPage(world);
         return isBookFlightPageLoaded;
     }
 
-    private async verifyFlightPage(): Promise<boolean> {
+    private async verifyFlightPage(world: CustomWorld): Promise<boolean> {
         try {
-            const page = await this.isDisplayed(this.bookFlightPage);
+            const page = await this.isDisplayed(world, this.bookFlightPage);
             return page;
         } catch (error) {
             return false;
