@@ -1,13 +1,13 @@
 const report = require("multiple-cucumber-html-reporter");
 
 report.generate({
-    jsonDir: "./test-report/",
-    reportPath: "./test-report/",
+    jsonDir: "./report/",
+    reportPath: "./report/",
     displayDuration: true,
     displayReportTime: true,
     openReportInBrowser: true,
     saveCollectedJSON: false,
     disableLog: true,
-    pageTitle: "QAMIND TESTS",
-    reportName: "QAMIND TESTS",
+    pageTitle: "UI Tests",
+    reportName: "UI Tests",
 });

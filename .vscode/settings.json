@@ -1,4 +1,3 @@
-// Navigation from the feature file (Gherkin tests) to the step implemetnation
 {
 "workbench.iconTheme": "vscode-icons",
 "git.enableSmartCommit": true,
@@ -9,25 +8,19 @@
 "typescript.updateImportsOnFileMove.enabled": "always",
 "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-},​​​​​​​​
+},
 "cucumberautocomplete.steps": [
 "src/steps/*.ts",
     ],
-"cucumberautocomplete.syncfeatures": "src/test-features/*feature",
+"cucumberautocomplete.syncfeatures": "src/features/*feature",
 "cucumberautocomplete.strictGherkinCompletion": true,
 "cucumberautocomplete.strictGherkinValidation": true,
 "cucumberautocomplete.smartSnippets": true,
 "cucumberautocomplete.stepsInvariants": true,
 "cucumberautocomplete.skipDocStringsFormat": true,
-"cucumberautocomplete.formatConfOverride": {​​​​​​​​
-"And": 3,
-"But": "relative",
-    }​​​​​​​​,
 "cucumberautocomplete.onTypeFormat": true,
-"editor.quickSuggestions": {​​​​​​​​
-"comments": false,
-"strings": true,
-"other": true
-    }​​​​​​​​,
 "cucumberautocomplete.gherkinDefinitionPart": "(Given|When|Then)\\(",
-}​​​​​​​​
+"cSpell.words": [
+    "chromedriver"
+]
+}

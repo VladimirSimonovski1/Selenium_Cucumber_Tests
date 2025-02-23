@@ -33,4 +33,4 @@ POM (Page-Object Model)
 1. Open terminal & enter command: **npm run tests** (it will format the code, run all the tests, create and open a cucumber HTML report from the test execution)
 2. Open terminal & enter command: **npm run test** (it will format the code and run only one test based on the cucumber tag tests, create and open a cucumber HTML report from the test execution)
 
-*Note:* Expect an HTML test report to automatically open in browser after test execution. Location to the report: **reports/test-report/QAMINDTestReport.html**
+*Note:* Expect an HTML test report to automatically open in browser after test execution. Location to the report: **reports/report/QAMINDTestReport.html**
