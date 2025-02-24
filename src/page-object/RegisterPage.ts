@@ -2,6 +2,7 @@ import { By, Locator } from "selenium-webdriver";
 import { BasePage } from "./BasePage";
 import { CustomWorld } from "../../src/support/CustomWorld";
 import { WaitAndFind } from "../../src/support/WaitAndFind";
+import { DataTable } from "@cucumber/cucumber";
 
 export class RegisterPage extends BasePage {
     private readonly title: Locator;
@@ -66,61 +67,67 @@ export class RegisterPage extends BasePage {
         return title;
     }
 
-    public async fillRegisterFrom(world: CustomWorld): Promise<void> {
+    public async fillRegisterFrom(
+        world: CustomWorld,
+        table: DataTable,
+    ): Promise<void> {
         console.log("Populating the registration...");
-        await this.fill(world, this.firstName, "Vladimir");
-        await this.fill(world, this.lastName, "Simo");
-        await this.fill(world, this.address, "Test 124");
-        await this.fill(world, this.email, "test567@gmail.com");
-        await this.fill(world, this.phone, "12987665743");
-        await this.click(world, this.gender);
-        await this.click(world, this.hobbies);
-        await this.click(world, this.languages);
-        await this.selectOptionByText(
-            world,
-            this.languagesList,
-            this.languagesOptions,
-            "language",
-            "Danish",
-        );
-        await this.selectOptionByText(
-            world,
-            this.skills,
-            this.option,
-            "skill",
-            "Java",
-        );
-        await this.click(world, this.country);
-        await this.selectOptionByText(
-            world,
-            this.countryField,
-            this.countryOption,
-            "country",
-            "Denmark",
-        );
-        await this.selectOptionByText(
-            world,
-            this.date,
-            this.option,
-            "year",
-            "1992",
-        );
-        await this.selectOptionByText(
-            world,
-            this.month,
-            this.option,
-            "month",
-            "February",
-        );
-        await this.selectOptionByText(
-            world,
-            this.day,
-            this.option,
-            "day",
-            "25",
-        );
-        await this.fill(world, this.pwd, "12345679");
-        await this.fill(world, this.pwdConfirm, "12345679");
+        const options = table.hashes();
+        for (const option of options) {
+            await this.fill(world, this.firstName, option.FirstName);
+            await this.fill(world, this.lastName, option.LastName);
+            await this.fill(world, this.address, option.Address);
+            await this.fill(world, this.email, option.Email);
+            await this.fill(world, this.phone, option.Phone);
+            await this.click(world, this.gender);
+            await this.click(world, this.hobbies);
+            await this.click(world, this.languages);
+            await this.selectOptionByText(
+                world,
+                this.languagesList,
+                this.languagesOptions,
+                "language",
+                option.Language,
+            );
+            await this.selectOptionByText(
+                world,
+                this.skills,
+                this.option,
+                "skill",
+                option.Skill,
+            );
+            await this.click(world, this.country);
+            await this.selectOptionByText(
+                world,
+                this.countryField,
+                this.countryOption,
+                "country",
+                option.Country,
+            );
+            await this.selectOptionByText(
+                world,
+                this.date,
+                this.option,
+                "year",
+                option.Year,
+            );
+            await this.selectOptionByText(
+                world,
+                this.month,
+                this.option,
+                "month",
+                option.Month,
+            );
+            await this.selectOptionByText(
+                world,
+                this.day,
+                this.option,
+                "day",
+                option.Day,
+            );
+            await this.fill(world, this.pwd, option.Password);
+            await this.fill(world, this.pwdConfirm, option.Password);
+        }
         console.log("Registration successfully populated!");
     }
 

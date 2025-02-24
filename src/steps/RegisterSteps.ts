@@ -1,4 +1,4 @@
-import { Given, When } from "@cucumber/cucumber";
+import { DataTable, Given, When } from "@cucumber/cucumber";
 import { CustomWorld } from "../../src/support/CustomWorld";
 import { expect } from "chai";
 
@@ -15,7 +15,7 @@ Given(
 When(
     "the user fills out the register form",
     { timeout: 30000 },
-    async function (this: CustomWorld): Promise<void> {
-        await this.registerPage.fillRegisterFrom(this);
+    async function (this: CustomWorld, dataTable: DataTable): Promise<void> {
+        await this.registerPage.fillRegisterFrom(this, dataTable);
     },
 );

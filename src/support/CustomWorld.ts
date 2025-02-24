@@ -7,12 +7,14 @@ import { SubscribePage } from "../../src/page-object/SubscribePage";
 import { HomePage } from "../../src/page-object/HomePage";
 import { RegisterPage } from "../../src/page-object/RegisterPage";
 import 'dotenv/config'; 
+import { AlertPage } from "../../src/page-object/AlertPage";
 
 export class CustomWorld extends World {
     public driver: ThenableWebDriver;
     protected homePage: HomePage;
     protected subscribePage: SubscribePage;
     protected registerPage: RegisterPage;
+    protected alertPage: AlertPage;
     protected isBookFlightDisplayed: boolean;
     public logs: string[];
     public subscribeConfirmationText: string;
@@ -23,6 +25,7 @@ export class CustomWorld extends World {
         this.homePage = new HomePage();
         this.subscribePage = new SubscribePage();
         this.registerPage = new RegisterPage();
+        this.alertPage = new AlertPage();
         this.isBookFlightDisplayed = false;
         this.logs = [];
         console.log = (...args: any[]) => {
@@ -37,9 +40,7 @@ export class CustomWorld extends World {
         if (process.env.HEADLESS === "true") {
             console.log("Running in headless mode...");
             options.addArguments(
-                "--headless",
-                "--disable-gpu",
-                "--window-size=1920,1080",
+                "--headless"
             );
         }
         return new Builder()
