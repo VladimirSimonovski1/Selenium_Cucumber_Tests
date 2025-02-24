@@ -1,10 +1,12 @@
 import { IWorldOptions, World } from "@cucumber/cucumber";
 import { Builder, Capabilities, ThenableWebDriver } from "selenium-webdriver";
 import { ServiceBuilder } from "selenium-webdriver/chrome";
+import chrome from "selenium-webdriver/chrome";
 import chromedriver from "chromedriver";
 import { SubscribePage } from "../../src/page-object/SubscribePage";
 import { HomePage } from "../../src/page-object/HomePage";
 import { RegisterPage } from "../../src/page-object/RegisterPage";
+import 'dotenv/config'; 
 
 export class CustomWorld extends World {
     public driver: ThenableWebDriver;
@@ -31,9 +33,19 @@ export class CustomWorld extends World {
 
     private buildDriver() {
         console.log("Starting chrome driver...");
+        let options = new chrome.Options();
+        if (process.env.HEADLESS === "true") {
+            console.log("Running in headless mode...");
+            options.addArguments(
+                "--headless",
+                "--disable-gpu",
+                "--window-size=1920,1080",
+            );
+        }
         return new Builder()
             .forBrowser("chrome")
             .setChromeService(new ServiceBuilder(chromedriver.path))
+            .setChromeOptions(options)
             .withCapabilities(Capabilities.chrome())
             .build();
     }

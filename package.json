@@ -26,6 +26,7 @@
     "chromedriver": "^133.0.2",
     "cucumber-console-formatter": "^1.0.0",
     "cucumber-junit": "^1.7.1",
+    "dotenv": "^16.4.7",
     "eslint": "^9.21.0",
     "gherkin-lint": "^4.2.4",
     "ini": "^5.0.0",
