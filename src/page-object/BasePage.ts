@@ -23,7 +23,7 @@ export abstract class BasePage {
         try {
             const element = await WaitAndFind.findElement(world, locator);
             await WaitAndFind.waitToBeDisplayed(world, element);
-            await ElementAction.click(element);
+            await ElementAction.click(world, element);
         } catch (error) {
             throw new Error(error);
         }

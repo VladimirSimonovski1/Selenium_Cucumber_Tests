@@ -1,24 +1,36 @@
 import { IWorldOptions, World } from "@cucumber/cucumber";
-import { HomePage } from "../page-object/HomePage";
 import { Builder, Capabilities, ThenableWebDriver } from "selenium-webdriver";
-import log from "log";
 import { ServiceBuilder } from "selenium-webdriver/chrome";
 import chromedriver from "chromedriver";
+import { SubscribePage } from "../../src/page-object/SubscribePage";
+import { HomePage } from "../../src/page-object/HomePage";
+import { RegisterPage } from "../../src/page-object/RegisterPage";
 
 export class CustomWorld extends World {
     public driver: ThenableWebDriver;
     protected homePage: HomePage;
+    protected subscribePage: SubscribePage;
+    protected registerPage: RegisterPage;
     protected isBookFlightDisplayed: boolean;
+    public logs: string[];
+    public subscribeConfirmationText: string;
 
     constructor(options: IWorldOptions) {
         super(options);
         this.driver = this.buildDriver();
         this.homePage = new HomePage();
+        this.subscribePage = new SubscribePage();
+        this.registerPage = new RegisterPage();
         this.isBookFlightDisplayed = false;
+        this.logs = [];
+        console.log = (...args: any[]) => {
+            this.logs.push(args.join(" "));
+        };
+        this.subscribeConfirmationText = "";
     }
 
     private buildDriver() {
-        log.info("Starting chrome driver...");
+        console.log("Starting chrome driver...");
         return new Builder()
             .forBrowser("chrome")
             .setChromeService(new ServiceBuilder(chromedriver.path))

@@ -1,17 +1,20 @@
 import { WebElement } from "selenium-webdriver";
-import log from "log";
+import { CustomWorld } from "./CustomWorld";
 
 export class ElementAction {
-    public static async click(element: WebElement): Promise<void> {
-        log.info("Clicking on the element...");
+    public static async click(
+        world: CustomWorld,
+        element: WebElement,
+    ): Promise<void> {
+        await world.driver.executeScript(
+            "arguments[0].scrollIntoView(true);",
+            element,
+        );
         await element.click();
-        log.info("Element is clicked!");
     }
 
     public static async getText(element: WebElement): Promise<string> {
-        log.info("Fetching element text...");
         let elementText = await element.getText();
-        log.info(`Element text is fetched: ${elementText}`);
         return elementText;
     }
 
@@ -19,8 +22,13 @@ export class ElementAction {
         element: WebElement,
         text: string,
     ): Promise<void> {
-        log.info("Sending input value to an element...");
-        await element.sendKeys(text);
-        log.info("Input value entered successfully!");
+        const isEnabled = await element.isEnabled();
+        if (isEnabled) {
+            await element.click();
+            await element.clear();
+            await element.sendKeys(text);
+        } else {
+            throw new Error("Element is not enabled!");
+        }
     }
 }

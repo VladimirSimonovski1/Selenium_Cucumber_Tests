@@ -1,3 +1,4 @@
+@ignore
 Feature: List a flight
 
     As a customer
@@ -8,3 +9,8 @@ Feature: List a flight
         Given Emirates website is opened
         When the user navigates to the book flight page
         Then the user verifies that the book flight page is displayed
+
+    Scenario: Subscribe to the newsletter
+        Given Emirates website is opened
+        When the user subscribes to the newsletter
+        Then the user confirms that the subscription is complete

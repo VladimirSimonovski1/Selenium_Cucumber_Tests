@@ -8,6 +8,7 @@ export class HomePage extends BasePage {
     private readonly searchFlight: Locator;
     private readonly acceptPrivacy: Locator;
     private readonly bookFlightPage: Locator;
+    private readonly subscribe: Locator;
 
     constructor() {
         super("https://www.emirates.com");
@@ -18,11 +19,14 @@ export class HomePage extends BasePage {
         );
         this.acceptPrivacy = By.id("onetrust-accept-btn-handler");
         this.bookFlightPage = By.css("[data-auto='page-header']");
+        this.subscribe = By.css("[data-link='Subscribe special offer:Email address Subscribe']");
     }
 
     public async navigateTo(world: CustomWorld): Promise<void> {
+        console.log("Navigating to Emirates website...");
         await world.driver.navigate().to(this.baseURL);
         await world.driver.manage().window().maximize();
+        console.log("Emirates website successfully opened!");
     }
 
     public async verifyHomePage(world: CustomWorld): Promise<boolean> {
@@ -38,18 +42,25 @@ export class HomePage extends BasePage {
     public async navigateToBookFlightPage(
         world: CustomWorld,
     ): Promise<boolean> {
+        console.log(
+            "Home page successfully displayed! Navigating to book a flight page...",
+        );
+        let isBookFlightPageLoaded = false;
         await this.click(world, this.book);
         await this.click(world, this.searchFlight);
-        const isBookFlightPageLoaded = await this.verifyFlightPage(world);
-        return isBookFlightPageLoaded;
-    }
-
-    private async verifyFlightPage(world: CustomWorld): Promise<boolean> {
         try {
-            const page = await this.isDisplayed(world, this.bookFlightPage);
-            return page;
+            isBookFlightPageLoaded = await this.isDisplayed(
+                world,
+                this.bookFlightPage,
+            );
         } catch (error) {
             return false;
         }
+        console.log("Book flight page successfully opened!");
+        return isBookFlightPageLoaded;
+    }
+
+    public async navigateToSubscribePage(world: CustomWorld): Promise<void> {
+        await this.click(world, this.subscribe);
     }
 }
