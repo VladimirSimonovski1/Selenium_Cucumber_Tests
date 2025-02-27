@@ -31,4 +31,16 @@ export class ElementAction {
             throw new Error("Element is not enabled!");
         }
     }
+
+    public static async sendKeys(
+        element: WebElement,
+        text: string,
+    ): Promise<void> {
+        const isEnabled = await element.isEnabled();
+        if (isEnabled) {
+            await element.sendKeys(text);
+        } else {
+            throw new Error("Element is not enabled!");
+        }
+    }
 }

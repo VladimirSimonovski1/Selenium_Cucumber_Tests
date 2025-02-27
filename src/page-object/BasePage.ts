@@ -16,6 +16,16 @@ export abstract class BasePage {
         await ElementAction.enterText(element, text);
     }
 
+    public async sendKeys(
+        world: CustomWorld,
+        locator: Locator,
+        text: string,
+    ): Promise<void> {
+        const element = await WaitAndFind.findElement(world, locator);
+        await WaitAndFind.waitToBeDisplayed(world, element);
+        await ElementAction.sendKeys(element, text);
+    }
+
     public async click(
         world: CustomWorld,
         locator: Locator,

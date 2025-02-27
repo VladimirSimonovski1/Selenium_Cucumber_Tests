@@ -33,7 +33,7 @@ export class WaitAndFind {
         element: WebElement,
         timeout: number = 40000,
     ): Promise<boolean> {
-        await world.driver.wait(until.elementIsEnabled(element), timeout);
+        element = await world.driver.wait(until.elementIsEnabled(element), timeout);
         if (await element.isEnabled()) {
             return true;
         } else {
@@ -46,7 +46,7 @@ export class WaitAndFind {
         element: WebElement,
         timeout: number = 40000,
     ): Promise<boolean> {
-        await world.driver.wait(until.elementIsVisible(element), timeout);
+        element = await world.driver.wait(until.elementIsVisible(element), timeout);
         if (await element.isDisplayed()) {
             return true;
         } else {

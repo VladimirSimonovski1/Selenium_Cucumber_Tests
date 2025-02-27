@@ -1,4 +1,3 @@
-@ignore
 Feature: Alert
 
     Scenario: Alert scenario
